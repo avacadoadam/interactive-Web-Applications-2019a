@@ -1,18 +1,19 @@
 const fs = require('fs');
+express = require('express');
+var http = require('http');
 
 //14 - 20 error code = database failure
-
 let content = null;
 let database = {};
 try {
     content = readDatabase();
 } catch (e) {
-    console.err(e);
+    console.error(e);
     process.exit(14);
 }
 
 if (content || content === '') {
-    console.err('Database is empty');
+    console.error('Database is empty');
     process.exit(15);
 }
 
@@ -20,10 +21,30 @@ try {
     database = JSON.parse(content);
 } catch (e) {
     console.log("Database is not json or is corrupted");
-    console.err(e);
+    console.error(e);
     process.exit(16);
 }
 
+let app = express();
+let server = http.createServer(app);
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
+app.get('/blog', (req, res) => {
+});
+app.post('/blog', (req, res) => {
+});
+app.put('/blog', (req, res) => {
+});
+app.delete('/blog', (req, res) => {
+});
+
+//This is where we as the server to be listening to user with a specified IP and Port
+server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function () {
+    var addr = server.address();
+    console.log("Server listening at", addr.address + ":" + addr.port);
+});
 
 /**
  * Reads a content from a json file where the database data resides.
@@ -42,4 +63,5 @@ function readDatabase(databaseFileName = 'blogDatabase.json') {
         }
     });
 }
+
 
