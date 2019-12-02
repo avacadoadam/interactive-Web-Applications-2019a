@@ -1,5 +1,28 @@
 const fs = require('fs');
 
+//14 - 20 error code = database failure
+
+let content = null;
+let database = {};
+try {
+    content = readDatabase();
+} catch (e) {
+    console.err(e);
+    process.exit(14);
+}
+
+if (content || content === '') {
+    console.err('Database is empty');
+    process.exit(15);
+}
+
+try {
+    database = JSON.parse(content);
+} catch (e) {
+    console.log("Database is not json or is corrupted");
+    console.err(e);
+    process.exit(16);
+}
 
 
 /**
