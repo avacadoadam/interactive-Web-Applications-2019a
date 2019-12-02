@@ -1,0 +1,17 @@
+{
+  "blogs": [
+    {
+      "id": 0,
+      "author": "Adam Sever",
+      "title": "Howya blog",
+      "description": "Its a good owl read",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at autem, corporis cum deserunt est ipsa itaque laborum officia, quae qui quia ratione repudiandae saepe sint ullam unde veritatis voluptate.",
+      "pictureUrl": "none",
+      "youtubeUrl": "none",
+      "createAt": "today"
+    }
+  ]
+
+
+
+}
