@@ -11,8 +11,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 content = readDatabase()
-    .then(database => {
-        this.database = database;
+    .then(result => {
+        database = result;
         server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function () {
             var addr = server.address();
             console.log("Server listening at", addr.address + ":" + addr.port);
@@ -20,14 +20,38 @@ content = readDatabase()
     });
 
 app.get('/blog', (req, res) => {
-
+    let id = req.query.id;
+    console.log(id);
+    let blog = getBlogAtIndex(id);
+    if (blog) {
+        res.write(JSON.stringify(blog));
+    } else {
+        res.write(JSON.stringify({"error": "not found"}));
+    }
+    res.end();
 });
+
 app.post('/blog', (req, res) => {
+    console.log(req.body);
+    console.log(typeof req.body);
+    res.end();
 });
 app.put('/blog', (req, res) => {
 });
 app.delete('/blog', (req, res) => {
 });
+
+/**
+ * A helper function to get a blog in the json structure.
+ * @param index the index of the blog
+ * @returns {Object}
+ */
+function getBlogAtIndex(index) {
+    let arr = database.blogs;
+    return arr.find(blog => {
+        if (blog.id == parseInt(index, 10)) return blog;
+    });
+}
 
 /**
  * Reads a content from a json file where the database data resides.
