@@ -1,7 +1,10 @@
 const fs = require('fs');
 express = require('express');
 let http = require('http');
+let Filter = require('bad-words');
+let url = require('url');
 
+let filter = Filter();
 let database = {};
 
 let app = express();
@@ -32,6 +35,22 @@ app.get('/blog', (req, res) => {
 });
 
 app.post('/blog', (req, res) => {
+    //validate data
+    //ensure all needed fields are there
+    //
+    let reqBody = req.body;
+    let requiredParams = ['author','title','description','content','pictureUrl','youtubeUrl'];
+    let validate = (obj) => requiredParams.every(field => obj.hasOwnProperty(field));
+
+    if (validate(reqBody)) {
+        //ensure url are correct
+        reqBody = filter.clean(reqBody.content);
+        url.parse(reqBody.youtubeUrl);
+    } else {
+        res.send({'error':'all fields must be set'});
+    }
+
+
     console.log(req.body);
     console.log(typeof req.body);
     res.end();
@@ -94,5 +113,6 @@ function logAndExit(statusCode, errMsg, error = null) {
     if (error) console.log(error);
     process.exit(statusCode);
 }
+
 
 
