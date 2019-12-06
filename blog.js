@@ -40,17 +40,17 @@ app.post('/blog', (req, res) => {
     //
     let reqBody = req.body;
     console.log(typeof reqBody);
-    let requiredParams = ['author','title','description','content','pictureUrl','youtubeUrl'];
+    let requiredParams = ['author', 'title', 'description', 'content', 'pictureUrl', 'youtubeUrl'];
     let validate = (obj) => requiredParams.every(field => obj.hasOwnProperty(field));
     //validate length.
-    if (validate(reqBody)) {//ensure url are correct
+
+    if (validate(reqBody)) {
 
         reqBody.content = filter.clean(reqBody.content);
         url.parse(reqBody.youtubeUrl);
-        database.blogs.
-        res.send({'result':true})
+        database.blogs.res.send({'result': true})
     } else {
-        res.send({'error':'all fields must be set'});
+        res.send({'error': 'all fields must be set'});
     }
     res.end();
 });
