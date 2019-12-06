@@ -7,7 +7,6 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
 
-    <!--    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -58,7 +57,18 @@
     </div>
 </nav>
 
-<div class="container d-flex flex-column " id="top">
+
+<div class="container d-flex flex-column" id="top">
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Limited time <strong> special offer</strong></h4>
+        <p>Our college is due to open on the 2th of januray!</p>
+        <p class="mb-0">Util then all prices will be reduce by 40%!</p>
+        <p>Enroll now and get classes as cheap as 69&#x20AC;</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
 
     <div class="card" id="about" #about>
@@ -89,12 +99,21 @@
         <hr style="width: 100%; color: black; height: 1px; background-color:black;"/>
         <div class="row">
             <iframe src="http://www.youtube.com/embed/W7qWa52k-nE"
-                    allowfullscreen class="col-6" height="315" width="560"></iframe>
-            <p class="col-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, doloribus enim id ipsam
+                    allowfullscreen frameborder="0" class="col-6" height="315" width="560"></iframe>
+            <p class="col-6"><img src="assets/placeholder_profile.svg" alt="profilePlaceholder" width="32px" height="32px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, doloribus enim id ipsam
                 odio quae quaerat. Culpa ipsa iure, necessitatibus officiis reprehenderit similique veritatis? Error
                 iste nam perferendis perspiciatis tempore?</p>
         </div>
+        <div class="card-footer">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="email" aria-label="email" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button">subscribe to vlog</button>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="card" id="pricing" #pricing>
         <h4 class="card-title">Course pricing</h4>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;"/>
@@ -121,8 +140,13 @@
             </ul>
         </div>
 
-
-        <button class="btn btn-success" type="button">Enroll Now!</button>
+        <div class="row">
+            <div class="col-3"></div>
+            <button class="btn btn-success col-3" type="button">Enroll Now!</button>
+            <div class="col-1"></div>
+            <img src="assets/credit-cards.png" alt="creditCards" class="col-3">
+            <div class="col-3"></div>
+        </div>
 
 
     </div>
@@ -141,74 +165,62 @@
         <h4 class="card-title">Something on your mind? Contact us here &#x1F603;</h4>
         <hr style="width: 100%; color: black; height: 1px; background-color:black;"/>
         <div class="form-group">
+
+            <textarea class="form-control form-control-lg" placeholder="Whats on your mind =)"></textarea>
             <div class="form-inline">
                 <input class="form-control mb-2 mr-sm-2" name="name" placeholder="name" type="text">
                 <input class="form-control mb-2 mr-sm-2" name="email" placeholder="email" type="text">
+                <button class="form-control btn btn-primary mb-2 mr-sm-2" onclick="contact_send()">Send</button>
             </div>
 
-            <!--            <span>Whats your name?</span>-->
-
-            <!--            <span>Whats your email?</span>-->
-            <!--            <span>your message</span>-->
-            <textarea class="form-control form-control-lg" placeholder="Whats on your mind =)"></textarea>
-
-            <button class="btn btn-primary" onclick="contact_send()">Send</button>
         </div>
     </div>
     <div class="card">
         <h4 class="card-title">Our Team</h4>
-
         <div class="card-body">
             <div class="row">
                 <div class="col text-center">
-                    <h2>Hue</h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <h2>Hue Kelly</h2>
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
                 <div class="col text-center">
                     <h2>Paul </h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
                 <div class="col text-center">
                     <h2>Philip </h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
             </div>
             <div class="row">
                 <div class="col text-center">
                     <h2>Peter </h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
 
                 <div class="col text-center">
                     <h2>luke </h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
                 <div class="col text-center">
                     <h2>Thomas</h2>
-                    <img alt="profilePic" height="54" src="assets/placeholder_profile.jpg" width="64">
+                    <img alt="profilePic" height="54" src="assets/placeholder_profile.svg" width="64">
                 </div>
 
 
             </div>
 
-        </div>
+
+
+            <div class="card">
+                <h4 class="card-title">Where are we?</h4>
+                <span >Located in the heart of dublin</span>
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.746585741917!2d-6.235949484537096!3d53.34779237997926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670ef203b1b361%3A0x70a57d698babaec8!2sWeWork!5e0!3m2!1sen!2sie!4v1575627120334!5m2!1sen!2sie"   frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+            </div>
 
     </div>
-
-    <!--    <div class="card cardElement"> //add Blog-->
-
-    <!--        <input type="text" placeholder="Title">-->
-    <!--        <input type="text" placeholder="Youtube Link">-->
-    <!--        <input type="text" placeholder="topic">-->
-    <!--        <textarea rows="5" cols="50" placeholder="Add blog here" id="content" oninput="updatePreview()"></textarea>-->
-
-
-    <!--        <button>Submit</button>-->
-    <!--        <div id="preview"></div>-->
-
-
-    <!--    </div>-->
-    //TODO add social media links
     <script>
 
         function updatePreview() {
@@ -222,97 +234,21 @@
 
     </script>
 
-    <script>
-        (function ($) {
-            "use strict"; // Start of use strict
 
-            // Smooth scrolling using jQuery easing
-            $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-                    var target = $(this.hash);
-                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                    if (target.length) {
-                        $('html, body').animate({
-                            scrollTop: (target.offset().top - 70)
-                        }, 1000, "easeInOutExpo");
-                        return false;
-                    }
-                }
-            });
-
-            // Closes responsive menu when a scroll trigger link is clicked
-            $('.js-scroll-trigger').click(function () {
-                $('.navbar-collapse').collapse('hide');
-            });
-
-            // Activate scrollspy to add active class to navbar items on scroll
-            $('body').scrollspy({
-                target: '#mainNav',
-                offset: 100
-            });
-
-            // Collapse Navbar
-            var navbarCollapse = function () {
-                if ($("#mainNav").offset().top > 100) {
-                    $("#mainNav").addClass("navbar-shrink");
-                } else {
-                    $("#mainNav").removeClass("navbar-shrink");
-                }
-            };
-            // Collapse now if page is not at top
-            navbarCollapse();
-            // Collapse the navbar when page is scrolled
-            $(window).scroll(navbarCollapse);
-            //test now click
-            $('#start_test').click(() => {
-                //fetch components
-                var test1 = {
-                    "question": "The dog _ in the park",
-                    "choices": [
-                        "walk",
-                        "walking",
-                        "walked"
-                    ]
-                };
-                var test2 = {
-                    "question": "I really take pride in my ability to cook",
-                    "choices": [
-                        "can",
-                        "ability",
-                        "able",
-                        "way"
-                    ]
-                };
-
-                function builder(testObj) {
-                    return ' <span class="question" >' + testObj.question + '</span>\n' +
-                        '            <select name="choices" id="choices">\n' +
-                        '                <option value="0" class="form-control">' + testObj.choices[0] + '</option>\n' +
-                        '                <option value="1" class="form-control">' + testObj.choices[1] + '</option>\n' +
-                        '                <option value="2" class="form-control">' + testObj.choices[2] + '</option>\n' +
-                        '                <option value="3" class="form-control">' + testObj.choices[3] + '</option>\n' +
-                        '            </select>'
-                }
-
-                $('#testContainer').append(builder(test1));
-                $('#testContainer').append(builder(test2));
-                $('#start_test').text("submit");
-
-
-            });
-
-        })(jQuery); // End of use strict
-    </script>
 </div>
 
-
+<script src="navScript.js" type="application/javascript"></script>
 <!-- Footer -->
 <footer class="page-footer font-small blue pt-4">
     <div class="container-fluid text-center text-md-left">
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
-                <h5 class="text-uppercase">Footer Content</h5>
-                <p>Here you can use rows and columns to organize your footer content.</p>
+                <h5 class="text-uppercase">FSE</h5>
+                <p>We are a english school that prides itself in giving you the best chance of enter employment,
+                    with a 90% of our students passing their cambridge certificate and enter employment your best choice is,
+                    FSE
+                </p>
+                <img src="assets/cambridge.jpeg" alt="cambridge">
 
             </div>
             <hr class="clearfix w-100 d-md-none pb-3">
@@ -356,6 +292,8 @@
         <a href="#!"> englishSchool.com</a>
     </div>
 </footer>
+
+
 
 
 </body>

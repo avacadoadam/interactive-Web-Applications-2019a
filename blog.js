@@ -39,13 +39,10 @@ app.post('/blog', (req, res) => {
     //ensure all needed fields are there
     //
     let reqBody = req.body;
-    console.log(typeof reqBody);
     let requiredParams = ['author', 'title', 'description', 'content', 'pictureUrl', 'youtubeUrl'];
     let validate = (obj) => requiredParams.every(field => obj.hasOwnProperty(field));
     //validate length.
-
     if (validate(reqBody)) {
-
         reqBody.content = filter.clean(reqBody.content);
         url.parse(reqBody.youtubeUrl);
         database.blogs.res.send({'result': true})
@@ -55,6 +52,7 @@ app.post('/blog', (req, res) => {
     res.end();
 });
 app.put('/blog', (req, res) => {
+
 });
 app.delete('/blog', (req, res) => {
 });
