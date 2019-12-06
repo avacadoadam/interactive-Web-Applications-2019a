@@ -61,6 +61,21 @@ app.put('/blog', (req, res) => {
 
 });
 app.delete('/blog', (req, res) => {
+    let index = req.body.id;
+    if (!index) {
+        res.send({'error': 'No id specified'});
+        return;
+    }
+    db.deleteFromDatabase(index)
+        .then(() => {
+            res.send({'result': true});
+            res.end();
+        })
+        .catch((e) => {
+            console.log('from delete');
+            console.log(e);
+            res.send({'error': 'unable to update database'})
+        })
 });
 app.get('/blogs', (req, res) => {
 });

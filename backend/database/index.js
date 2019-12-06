@@ -76,6 +76,30 @@ function writeToDatabase(blog, databaseFileName = 'blogDatabase.json') {
 }
 
 /**
+ * A function to remove a blog from the database in the local variable and in the file by completely rewriting the file.
+ * @param index The index of the blog to be removed
+ * @param databaseFileName A optional database file name default is blogDatabase
+ * @returns {Promise} will resolve if the file was written to successful, will reject if not, this may be due to
+ * insufficient permissions or missing file,
+ */
+function deleteFromDatabase(index, databaseFileName = 'blogDatabase.json') {
+    return new Promise(((resolve, reject) => {
+        let indexInArray = database.blogs.findIndex(element => element.id === index);
+        database = database.blogs.slice(indexInArray - 1, 1);
+        console.log(JSON.stringify(database));
+        fs.writeFile(databaseFileName, JSON.stringify(database), e => {
+            if (e) {
+                reject(e)
+            } else {
+                resolve();
+            }
+        })
+
+    }));
+
+}
+
+/**
  * A helper function to display a error message and exit system with status code
  * @param statusCode Exit code
  * @param errMsg Error message
@@ -103,3 +127,4 @@ function getBlogAtIndex(index) {
 exports.readDatabase = readDatabase;
 exports.getBlogAtIndex = getBlogAtIndex;
 exports.writeToDatabase = writeToDatabase;
+exports.deleteFromDatabase = deleteFromDatabase;
