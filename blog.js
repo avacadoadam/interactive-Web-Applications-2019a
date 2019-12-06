@@ -4,7 +4,7 @@ let http = require('http');
 let Filter = require('bad-words');
 let url = require('url');
 
-let filter = Filter();
+let filter = new Filter();
 let database = {};
 
 let app = express();
@@ -16,8 +16,8 @@ app.use(express.json());
 content = readDatabase()
     .then(result => {
         database = result;
-        server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function () {
-            var addr = server.address();
+        server.listen(process.env.PORT || 3000, process.env.IP || "127.0.0.1", function () {
+            var addr =  server.address();
             console.log("Server listening at", addr.address + ":" + addr.port);
         });
     });
@@ -39,25 +39,26 @@ app.post('/blog', (req, res) => {
     //ensure all needed fields are there
     //
     let reqBody = req.body;
+    console.log(typeof reqBody);
     let requiredParams = ['author','title','description','content','pictureUrl','youtubeUrl'];
     let validate = (obj) => requiredParams.every(field => obj.hasOwnProperty(field));
+    //validate length.
+    if (validate(reqBody)) {//ensure url are correct
 
-    if (validate(reqBody)) {
-        //ensure url are correct
-        reqBody = filter.clean(reqBody.content);
+        reqBody.content = filter.clean(reqBody.content);
         url.parse(reqBody.youtubeUrl);
+        database.blogs.
+        res.send({'result':true})
     } else {
         res.send({'error':'all fields must be set'});
     }
-
-
-    console.log(req.body);
-    console.log(typeof req.body);
     res.end();
 });
 app.put('/blog', (req, res) => {
 });
 app.delete('/blog', (req, res) => {
+});
+app.get('/bogs', (req,res) => {
 });
 
 /**
@@ -68,7 +69,7 @@ app.delete('/blog', (req, res) => {
 function getBlogAtIndex(index) {
     let arr = database.blogs;
     return arr.find(blog => {
-        if (blog.id == parseInt(index, 10)) return blog;
+        if (blog.id === parseInt(index, 10)) return blog;
     });
 }
 
@@ -81,7 +82,7 @@ function getBlogAtIndex(index) {
  * @returns {Promise<Object>} returns the parse database json file.
  */
 async function readDatabase(databaseFileName = 'blogDatabase.json') {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         fs.readFile(databaseFileName, 'utf8', (err, contents) => {
             if (err) {
                 logAndExit(14, "Could not find the " + databaseFileName + " file or permission was not given", err);
