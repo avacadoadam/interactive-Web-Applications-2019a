@@ -100,6 +100,14 @@ function deleteFromDatabase(index, databaseFileName = 'blogDatabase.json') {
     }));
 }
 
+/**
+ * Updates a blog in the database in the variable then stringify and writing to database.
+ * The blog must be a full blog and not just updated params
+ * @param index index of the blog to update
+ * @param blog The new full blog object
+ * @param databaseFileName optional database filename
+ * @returns {Promise} A promise that will resolve if the file was successfully wrote to
+ */
 function updateBlog(index, blog, databaseFileName = 'blogDatabase.json') {
     return new Promise((resolve, reject) => {
         database[index] = blog;
@@ -111,7 +119,6 @@ function updateBlog(index, blog, databaseFileName = 'blogDatabase.json') {
             }
         })
     })
-
 }
 
 /**
@@ -138,6 +145,10 @@ function getBlogAtIndex(index) {
     });
 }
 
+/**
+ * Returns the array of blogs in the database
+ * @returns {{}} array of blogs
+ */
 function getBlogs() {
     return database;
 }
