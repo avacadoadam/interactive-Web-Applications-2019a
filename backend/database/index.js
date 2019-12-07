@@ -11,6 +11,8 @@ const fs = require('fs');
 //read blog at index
 //edit blog at index
 //write blog at index
+
+//trying to use spread for exitstatus code function ...
 let database = {};
 let index = 0; // the highest index in the database for blogs
 
@@ -37,8 +39,8 @@ function readDatabase(databaseFileName = 'blogDatabase.json') {
                 } catch (e) {
                     logAndExit(16, "Database is not json or is corrupted", e);
                 }
-                console.log(typeof database.blogs);
-                index = database.blogs.reduce((highest, current,) => {
+                console.log(typeof database);
+                index = database.reduce((highest, current,) => {
                     highest += current.id;
                     if (current.id > highest) {
                         highest = current.id
@@ -62,7 +64,7 @@ function readDatabase(databaseFileName = 'blogDatabase.json') {
 function writeToDatabase(blog, databaseFileName = 'blogDatabase.json') {
     index++;
     blog.id = index;
-    database.blogs.push(blog);
+    database.push(blog);
     return new Promise((resolve, reject) => {
         fs.writeFile(databaseFileName, JSON.stringify(database), (e) => {
             if (e) {
@@ -84,8 +86,8 @@ function writeToDatabase(blog, databaseFileName = 'blogDatabase.json') {
  */
 function deleteFromDatabase(index, databaseFileName = 'blogDatabase.json') {
     return new Promise(((resolve, reject) => {
-        let indexInArray = database.blogs.findIndex(element => element.id === index);
-        database = database.blogs.slice(indexInArray - 1, 1);
+        let indexInArray = database.findIndex(element => element.id === index);
+        database = database.slice(indexInArray - 1, 1);
         console.log(JSON.stringify(database));
         fs.writeFile(databaseFileName, JSON.stringify(database), e => {
             if (e) {
@@ -96,6 +98,19 @@ function deleteFromDatabase(index, databaseFileName = 'blogDatabase.json') {
         })
 
     }));
+}
+
+function updateBlog(index, blog, databaseFileName = 'blogDatabase.json') {
+    return new Promise((resolve, reject) => {
+        database[index] = blog;
+        fs.writeFile(databaseFileName, JSON.stringify(database), e => {
+            if (e) {
+                reject(e)
+            } else {
+                resolve();
+            }
+        })
+    })
 
 }
 
@@ -118,13 +133,18 @@ function logAndExit(statusCode, errMsg, error = null) {
  * @returns {Object}
  */
 function getBlogAtIndex(index) {
-    let arr = database.blogs;
-    return arr.find(blog => {
+    return database.find(blog => {
         if (blog.id === parseInt(index, 10)) return blog;
     });
+}
+
+function getBlogs() {
+    return database;
 }
 
 exports.readDatabase = readDatabase;
 exports.getBlogAtIndex = getBlogAtIndex;
 exports.writeToDatabase = writeToDatabase;
 exports.deleteFromDatabase = deleteFromDatabase;
+exports.getBlogs = getBlogs;
+exports.updateBlog = updateBlog;
