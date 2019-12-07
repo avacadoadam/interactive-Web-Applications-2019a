@@ -11,9 +11,11 @@ const fs = require('fs');
 //read blog at index
 //edit blog at index
 //write blog at index
-let database = {};
+let database = null;
 let index = 0; // the highest index in the database for blogs
 
+
+//TODO https://stackoverflow.com/questions/12996871/why-does-typeof-array-with-objects-return-object-and-not-array
 
 /**
  * Reads a content from a json file where the database data resides.
@@ -37,8 +39,9 @@ function readDatabase(databaseFileName = 'blogDatabase.json') {
                 } catch (e) {
                     logAndExit(16, "Database is not json or is corrupted", e);
                 }
-                console.log(typeof database.blogs);
-                index = database.blogs.reduce((highest, current,) => {
+                // console.log(typeof database[]);
+                console.log(JSON.stringify(database));
+                index = database.reduce((highest, current,) => {
                     highest += current.id;
                     if (current.id > highest) {
                         highest = current.id
