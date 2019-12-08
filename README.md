@@ -1,6 +1,7 @@
 # Interactive-Web-Applications-2019a ![nodeJS icon](https://assets.coingecko.com/coins/images/1061/small/js.png?1511578998)
 
-table of contents
+## table of contents
+
 * Goals
 * Brief
 * Requirements
@@ -9,6 +10,9 @@ table of contents
 * Technology Frontend
 * Technology Database
 * Take away
+* API
+* Reference
+
 
 ## Goals
 
@@ -35,12 +39,15 @@ As well as all CRUD functionality.
   
   
 ## NPM dependencies
-  * bad-words
-  * http
-  * url
-  * fs
-  * express
-  * jsontoxml
+* bad-words
+* http
+* url
+* fs
+* express
+* Jsontoxml
+* Xml2js
+* xslt-processor
+
 
 ## Technology backend
 
@@ -57,6 +64,30 @@ Currently the database is a json fill which contains a list blogs.
 However upgrading to a mongoDB should be straight forward as the database code is isolated away from the server logic.
 
 ## Take away
-Using this stack development time was fast and still robust. Which only two minor bugs occuring due to incorrectly assign variables. 
+Using this stack development time was fast and still robust. Which only two minor bugs occuring due to incorrectly assign variables.
+Theres was a error with cors so cors middleware was added to the server.
+ 
+The database uses promises whoever I believe a simple callback would be sufficient as the error handling is not implement this is due to the fact that the server will die if database encounters a problem.
+ 
+It may be better practice to return a error object {'statuscode','error message'} and handle it in blog.js.
+
+## API
+Post /blog 
+Takes a json blog object which mendator fields.
+Returns a JSON object that specifies if a error occurs or if a succeeds.
+
+PUT /blog
+Takes a blog object note does not need to contain all fields only fields specified will be added. Any field that is not listed will be removed.
+Takes a id param in the query string specify which blog to update.
+Returns a JSON object that specifies if a error occurs or if a succeeds.
+
+Get /blog
+Takes a id param in the query string specify which blog to return
+Optional header value xml which iif set to ‘true’ will return the blog formated in a styled html.
+Returns a JSON object that specifies if a error occurs or if a succeeds.
+
+Delete /blog
+Takes a id param in the query string specify which blog to return.
+Returns a JSON object that specifies if a error occurs or if a succeeds.
 
 
